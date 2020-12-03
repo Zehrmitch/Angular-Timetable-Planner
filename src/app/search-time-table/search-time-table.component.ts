@@ -16,7 +16,9 @@ export class SearchTimeTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displaySubjects(SC: String, CC: String) {
+  displaySubjects(SC: string, CC: string) {
+    var SC = SC.toUpperCase();
+    var CC = CC.toUpperCase();
     this.service.timetableSearch(SC, CC).subscribe(e => {
       this.courses = e;
     });

@@ -16,7 +16,8 @@ export class CourseSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayCourses(courseCode: String) {
+  displayCourses(courseCode: string) {
+    var courseCode = courseCode.toUpperCase();
     this.service.courseSearch(courseCode).subscribe(e => {
       this.courseList = e;
     });

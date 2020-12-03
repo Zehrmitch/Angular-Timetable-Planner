@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'schedules', component: SchedulesComponent, canActivate: [AuthGuard]},
-  {path: 'courses', component: CoursesComponent, canActivate: [AuthGuard]},
+  {path: 'courses', component: CoursesComponent},
   {path: 'about', component: AboutComponent},
   {path: '', redirectTo:'main',pathMatch: 'full'}
 ];

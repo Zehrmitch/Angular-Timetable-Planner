@@ -187,7 +187,7 @@ function getCourseCodes(SC) {
 
 function getCourseSearch(SC, CC) {
     var subjectCodes = text.filter(function (text) {
-        if (SC === text.subject && String(CC) === String(text.catalog_nbr)){
+        if (SC === text.subject && (text.catalog_nbr).includes(String(CC))){
             return text;
         }
     });
