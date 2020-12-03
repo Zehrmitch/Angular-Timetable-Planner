@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { firestore } from 'firebase-admin';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +13,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  name: string;
   email: string;
   password: string;
   passwordTwo: string;
   
-  constructor(public auth: AngularFireAuth, private router: Router) { }
+  constructor(public auth: AngularFireAuth, private router: Router, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +29,7 @@ export class RegisterComponent implements OnInit {
       .then((user) => {
         alert(user);
         this.router.navigateByUrl("/main");
+        this.createUser();
         // Signed in
       })
       .catch((error) => {
@@ -36,5 +41,21 @@ export class RegisterComponent implements OnInit {
     }else {
       alert("Passwords do not match. Please try again");
     }
+  }
+
+  createUser() {
+    var data = {
+      email: this.email,
+      password: this.password,
+      name: this.name,
+      isAdmin: false
+    }
+
+    return new Promise<any>((resolve, reject) =>{
+        this.firestore.collection("users").add(data)
+            .then(res => {
+              alert("user added");
+            }, err => reject(err));
+    });
   }
 }

@@ -14,11 +14,13 @@ export class AuthGuard implements CanActivate {
 
   canActivate(){
     var user = firebase.auth().currentUser;
+    console.log(user);
     if(user){
       console.log("Logged in");
       return true;
     } else {
       console.log("Logged out");
+      alert("Please log in to access this feature");
       this.router.navigateByUrl("/main");
       return false;
     }

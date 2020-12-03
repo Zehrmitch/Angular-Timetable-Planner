@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/request.service';
 import { SearchTimetable } from 'src/app/Models/search-timetable.model';
+import { BrowserModule } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-search-time-table',

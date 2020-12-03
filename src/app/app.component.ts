@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { firestore } from 'firebase-admin';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +11,13 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'Timetable Planner';
   items: Observable<any[]>;
-  constructor(firestore: AngularFirestore) {
+
+  constructor(private firestore: AngularFirestore) {
     this.items = firestore.collection('items').valueChanges();
   }
+
+  ngOnInit(){
+
+  }
+
 }

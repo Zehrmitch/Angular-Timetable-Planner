@@ -13,18 +13,6 @@ var cache = flatCache.load('scheduleCache');
 let rawdata = fs.readFileSync("data.json");
 var text = JSON.parse(rawdata);
 
-// Lowdb database
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
-const db = low(adapter);
-var bodyParser = require('body-parser')
-
-// Create schedules and users
-const dbSchedules = db.get('schedules').value();
-const dbUsers = db.get('users').value();
-
-
 // REST
 app.use(express.json());
 app.use(bodyParser.json());
@@ -187,7 +175,7 @@ function getCourseCodes(SC) {
 
 function getCourseSearch(SC, CC) {
     var subjectCodes = text.filter(function (text) {
-        if (SC === text.subject && (text.catalog_nbr).includes(String(CC))){
+        if (SC === text.subject && (String(text.catalog_nbr)).includes(CC)){
             return text;
         }
     });

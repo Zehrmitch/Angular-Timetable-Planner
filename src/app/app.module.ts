@@ -20,6 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { environment } from '../environments/environment';
     RegisterComponent,
     SchedulesComponent,
     CoursesComponent,
-    AboutComponent
+    AboutComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,6 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    BrowserModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],

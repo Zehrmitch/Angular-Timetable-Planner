@@ -1,0 +1,11 @@
+<p>Dashboard</p>
+
+<p>Reset Password</p>
+<button (click)="resetPass()">Reset Password</button>
+
+<p>Add User Data</p>
+
+
+<div *ngFor="let user of users | async">
+    <p>{{ user | json }}</p>
+</div>

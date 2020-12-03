@@ -14,16 +14,15 @@
       <button mat-raised-button (click)="displaySubjects(subject.value, course.value)">Search</button>
     </p>
     <ul id="timetableSearch">
-        <li *ngFor="let x of courses">Subject: {{x.subject}}</li>
-        <li *ngFor="let x of courses">Class Number: {{x.catalog_nbr}}</li>
-        <li *ngFor="let x of courses">Class Name: {{x.className}}</li>
-        <li *ngFor="let x of courses">Class Section: {{x.course_info[0].class_section}}</li>
-        <li *ngFor="let x of courses">SSR Component: {{x.course_info[0].ssr_component}}</li>
-
-        <li *ngFor="let x of courses">Description: {{x.catalog_description}}</li>
-        <li *ngFor="let x of courses">Campus: {{x.course_info[0].campus}}</li>
-        <li *ngFor="let x of courses">Start Time: {{x.course_info[0].start_time}}</li>
-        <li *ngFor="let x of courses">End Time: {{x.course_info[0].end_time}}</li>
-        <li *ngFor="let x of courses">Days: {{x.course_info[0].days}}</li>
+        <li *ngFor="let x of courses">
+          <span> Subject: {{x.subject}}</span><br>
+          <span> Class Number: {{x.catalog_nbr}}</span><br>
+          <span> Class Section: {{x.course_info[0].class_section}}</span><br>
+          <span> SSR Component: {{x.course_info[0].ssr_component}}</span><br>
+          <span> Description: {{x.catalog_description}}</span><br>
+          <span> Campus: {{x.course_info[0].campus}}</span><br>
+          <span> Start Time: {{x.course_info[0].start_time}}</span><br>
+          <span> End Time: {{x.course_info[0].end_time}}</span><br>
+          </li>
     </ul>
 </div>
