@@ -1,24 +1,36 @@
 const express = require("express");
 const fs = require("fs");
 const process = require("process");
-var flatCache = require('flat-cache');
 const app = express();
 const port = process.env.PORT || 3000;
+
+var router = express.Router();
+var cors = require('cors');
+
+// Cache
+var flatCache = require('flat-cache');
+var cache = flatCache.load('scheduleCache');
 let rawdata = fs.readFileSync("data.json");
 var text = JSON.parse(rawdata);
-var router = express.Router();
-var cache = flatCache.load('scheduleCache');
-var cors = require('cors');
+
+// Lowdb database
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+var bodyParser = require('body-parser')
+
+// Create schedules and users
+const dbSchedules = db.get('schedules').value();
+const dbUsers = db.get('users').value();
+
 
 // REST
 app.use(express.json());
+app.use(bodyParser.json());
 app.use('/', express.static('static'));
+
 app.use(cors());
-
-
-// const path = require('path');// Point to directory containing static files
-// app.use(express.static(path.join(__dirname, 'dist/<your-app’s-name>')));//catch all other routes to return the index file
-// app.get('*', (req,res) => {res.sendFile(path.join(__dirname,'dist/se3316-mzehr4-lab4/index.html'));});
 
 router.get("/nameAndCodes", function(req, res) {
 	let nameAndCodesArray = getNameAndCode();
@@ -26,16 +38,20 @@ router.get("/nameAndCodes", function(req, res) {
 });
 
 router.get("/getCourseCodes/:id", function(req, res) {
+    req.params.id = sanitize(req.params.id);
 	let nameAndCodesArray = getCourseCodes(req.params.id);
 	res.send(nameAndCodesArray);
 });
 
 router.get("/getCourseSearch/:SC/:CC", function(req, res) {
+    req.params.SC = sanitize(req.params.SC);
+    req.params.CC = sanitize(req.params.CC);
 	let courseSearch = getCourseSearch(req.params.SC, req.params.CC);
 	res.send(courseSearch);
 });
 
 router.get("/getSchedule/:scheduleName", function(req, res) {
+    req.params.scheduleName = sanitize(req.params.scheduleName);
     let scheduleSearch = getSchedule(req.params.scheduleName);
 	res.send(scheduleSearch);
 });
@@ -46,16 +62,20 @@ router.get("/viewSchedules", function(req, res) {
 });
 
 router.post("/createSchedule/:SN", function(req, res) {
+    console.log(req.params.SN);
     let newSchedule = createSchedule(req.params.SN);
 	res.send(newSchedule);
 });
 
 router.put("/updateSchedule/:scheduleName", function(req, res) {
+    req.params.scheduleName = sanitize(req.params.scheduleName);
+    req.body = sanitize(req.body);
     let updatedSchedule = updateSchedule(req.params.scheduleName, req.body);
 	res.send(updatedSchedule);
 });
 
 router.delete("/deleteSchedule/:scheduleName", function(req, res) {
+    req.params.scheduleName = sanitize(req.params.scheduleName);
     let deleteASchedule = deleteSchedule(req.params.scheduleName);
 	res.send(deleteASchedule);
 });
@@ -66,12 +86,24 @@ router.delete("/deleteAllSchedules", function(req, res) {
 });
 
 app.use('/api', router);
-
 app.listen(port, () => {
     console.log(`Timetable is listening at http://localhost:${port}`);
 });
 
 // Functions
+function sanitize (string){
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+}
+
 function updateSchedule(sName, sCourses) {
     cache.setKey(sName, sCourses);
     cache.save(true);
@@ -112,7 +144,6 @@ function deleteAllSchedules() {
     let output = {
         text: 'deleted'
     }
-
     return output;
 }
 
@@ -132,7 +163,7 @@ function createSchedule(sName) {
 
 function getNameAndCode() {
 	var nameAndCodes = text.map(function (text) {
-        var content = { subject: text.subject, className: text.className };
+        var content = { subject: text.subject, className: text.className};
         return content;
     });
     return nameAndCodes;

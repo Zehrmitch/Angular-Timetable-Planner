@@ -3,6 +3,6 @@
     <button mat-raised-button (click)="displaySubjects()">Display All Subjects</button> 
     <button mat-raised-button (click)="hideSubjects()">Hide Subjects</button>
     <ul id="allSubjects">
-        <li *ngFor="let x of courses">{{x.subject}} -- {{x.className}}</li>
+        <li *ngFor="let x of courses">{{x.subject}} : {{x.className}}</li>
     </ul>
 </div>
