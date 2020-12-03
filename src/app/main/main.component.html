@@ -3,7 +3,9 @@
 <br>
 <p>Password</p>
 <input [(ngModel)] = "password">
-<button (click)="login()">Login</button>
+<button (click)="loginWithGoogle()">Login with Google</button>
+<button (click)="loginWithEmail()">Login</button>
+<button (click)="logout()">Logout</button>
 <br>
 <a routerLink="/register">Register Here</a>
 <br>

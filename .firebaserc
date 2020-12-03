@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "se3316-lab-5-mzehr4": {
+      "hosting": {
+        "se3316-mzehr4-lab4": [
+          "se3316-lab-5-mzehr4"
+        ]
+      }
+    }
+  }
+}

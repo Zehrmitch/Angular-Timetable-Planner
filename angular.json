@@ -118,6 +118,10 @@
               "devServerTarget": "se3316-mzehr4-lab4:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

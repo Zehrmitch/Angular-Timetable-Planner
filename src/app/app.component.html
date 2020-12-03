@@ -8,10 +8,15 @@
 </head>
 <body>
   <h1>{{title}}</h1>
+  <ul>
+    <li class="text" *ngFor="let item of items | async">
+      {{item.name}}
+    </li>
+</ul>
   <nav>
     <a routerLink="/main">Main</a>
-    <a routerLink="/courses">Courses</a>
     <a routerLink="/register">Register</a>
+    <a routerLink="/courses">Courses</a>
     <a routerLink="/schedules">Schedules</a>
     <a routerLink="/about">About</a>
   </nav>
