@@ -1,20 +1,27 @@
+<div id="about">
+    <h2>About</h2>
+    <p>Timetable planner is a utility that allows users to manage Western Unviersity courses. The planner
+        lets users search and view courses. If the user registers they are able to create personalized schedules
+        which can be published and viewed by other users.
+    </p>
+</div>
 
-<h2>About</h2>
-<p>Timetable planner is a utility that allows users to manage Western Unviersity courses. The planner
-    lets users search and view courses. If the user registers they are able to create personalized schedules
-    which can be published and viewed by other users.
-</p>
 
-
-<h2>Login</h2>
-<p>Email</p>
-<input [(ngModel)] = "email">
-<br>
-<p>Password</p>
-<input [(ngModel)] = "password">
-<button (click)="loginWithGoogle()">Login with Google</button>
-<button (click)="loginWithEmail()">Login</button>
-<button (click)="logout()">Logout</button>
-<br>
-<a routerLink="/register">Register Here</a>
-<br>
+<div id="login">
+    <h2>Login</h2>
+    <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)] = "email" id="timetableCourseCode" placeholder="eg. test@example.ca">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)] = "password" id="timetableCourseCode" type="password">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button (click)="loginWithEmail()">Login</button>
+    <button mat-raised-button (click)="logout()">Logout</button>
+    <button mat-raised-button (click)="loginWithGoogle()">Login with Google</button>
+    <br>
+    <a routerLink="/register">Register Here</a>
+    <br>
+</div>

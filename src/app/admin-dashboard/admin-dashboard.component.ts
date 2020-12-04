@@ -11,6 +11,7 @@ interface User{
   password: string;
   name: string;
   isAdmin: boolean;
+  enabled: boolean;
 }
 
 @Component({
@@ -24,7 +25,6 @@ export class AdminDashboardComponent implements OnInit {
   users: Observable<User[]>;
 
   constructor(public auth: AngularFireAuth, private firestore: AngularFirestore) { 
-
   }
 
   ngOnInit(): void {

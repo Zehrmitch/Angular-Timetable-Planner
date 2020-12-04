@@ -5,9 +5,20 @@
     width: 100%; 
     float: left; 
     background-color: rgb(167, 237, 255);
-    height: 400px;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
-
 button {
     margin-left: 10px;
+}
+.header {
+    display: block;
+}
+.expansionHeader{
+    height: auto;
+}
+.accordion{
+    margin: 5px;
+    background-color: transparent;
 }

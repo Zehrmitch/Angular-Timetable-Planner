@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
 	selector: "app-main",
@@ -12,7 +13,11 @@ export class MainComponent implements OnInit {
 	email: string;
 	password: string;
 
-	constructor(public auth: AngularFireAuth, private router: Router) {}
+	constructor(
+		public auth: AngularFireAuth,
+		private router: Router,
+		private firestore: AngularFirestore
+	) {}
 
 	ngOnInit(): void {
 		this.email = "";
@@ -21,21 +26,22 @@ export class MainComponent implements OnInit {
 
 	loginWithGoogle() {
 		this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-  
+	}
+
 	loginWithEmail() {
-		this.auth.signInWithEmailAndPassword(this.email, this.password)
+		this.auth
+			.signInWithEmailAndPassword(this.email, this.password)
 			.then((result) => {
-        alert("Logged in");
-        this.router.navigateByUrl("schedules");
+				alert("Logged in");
+				this.router.navigateByUrl("schedules");
 			})
 			.catch(function (error) {
 				alert(error);
 			});
-  }
-  
+	}
+
 	logout() {
-    this.auth.signOut();
-    console.log("logged out");
+		this.auth.signOut();
+		alert("Logged out");
 	}
 }

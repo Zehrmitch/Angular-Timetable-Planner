@@ -15,7 +15,6 @@ var text = JSON.parse(rawdata);
 
 // REST
 app.use(express.json());
-app.use(bodyParser.json());
 app.use('/', express.static('static'));
 
 app.use(cors());

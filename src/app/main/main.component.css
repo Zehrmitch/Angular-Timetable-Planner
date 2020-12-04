@@ -1,0 +1,25 @@
+#login{
+    margin-top: 20px;  
+    box-shadow: 0 0 0 2px black inset;
+    overflow:auto;
+    width: 98%; 
+    float: left; 
+    background-color: rgb(167, 237, 255);
+    height: auto;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+#about{
+    margin-top: 20px;   
+    box-shadow: 0 0 0 2px black inset;
+    overflow:auto;
+    width: 98%; 
+    float: left; 
+    background-color: rgb(167, 237, 255);
+    height: auto;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+button {
+    margin-left: 10px;
+}

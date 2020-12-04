@@ -13,16 +13,22 @@
 
       <button mat-raised-button (click)="displaySubjects(subject.value, course.value)">Search</button>
     </p>
-    <ul id="timetableSearch">
-        <li *ngFor="let x of courses">
-          <span> Subject: {{x.subject}}</span><br>
-          <span> Class Number: {{x.catalog_nbr}}</span><br>
-          <span> Class Section: {{x.course_info[0].class_section}}</span><br>
-          <span> SSR Component: {{x.course_info[0].ssr_component}}</span><br>
-          <span> Description: {{x.catalog_description}}</span><br>
-          <span> Campus: {{x.course_info[0].campus}}</span><br>
-          <span> Start Time: {{x.course_info[0].start_time}}</span><br>
-          <span> End Time: {{x.course_info[0].end_time}}</span><br>
-          </li>
-    </ul>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let course of courses" class="accordion">
+        <mat-expansion-panel-header class="expansionHeader">
+          <div class="header"> 
+            <p>Subject: {{ course.subject }}</p>
+            <p>Course Number: {{ course.catalog_nbr }}</p>
+            <p>Course Name: {{ course.className }}</p>
+          </div>
+        </mat-expansion-panel-header>
+          <p>Class Section: {{ course.course_info[0].class_section }}</p>
+          <p>Component: {{ course.course_info[0].ssr_component }}</p>
+          <p>Time: {{ course.course_info[0].start_time }} - {{ course.course_info[0].end_time }}</p>
+          <p>Days: {{ course.course_info[0].days }}</p>
+          <p>Description: {{ course.catalog_description }}</p>
+          <p>Campus: {{ course.course_info[0].campus }} </p>
+      </mat-expansion-panel>
+    </mat-accordion>
 </div>

@@ -48,7 +48,8 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       name: this.name,
-      isAdmin: false
+      isAdmin: false,
+      enabled: true
     }
 
     return new Promise<any>((resolve, reject) =>{
