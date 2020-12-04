@@ -22,6 +22,8 @@
     <button mat-raised-button (click)="logout()">Logout</button>
     <button mat-raised-button (click)="loginWithGoogle()">Login with Google</button>
     <br>
-    <a routerLink="/register">Register Here</a>
-    <br>
+    <div id="newUser">
+        <h3>New User?</h3>
+        <button mat-raised-button routerLink="/register">Register</button>
+    </div>
 </div>
