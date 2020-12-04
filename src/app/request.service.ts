@@ -32,8 +32,8 @@ export class RequestService {
     return this.http.get<SearchTimetable[]>(this.router + '/getCourseSearch/' + subjectCode + '/' + String(courseCode));
   }
 
-  createSchedule(scheduleName: String): Observable<NewTimetable> {
-    return this.http.post<NewTimetable>(this.router + '/createSchedule/' + scheduleName, {}, {headers: postHeader});
+  createSchedule(scheduleName: String, description: String, access: boolean, email: string): Observable<NewTimetable> {
+    return this.http.post<NewTimetable>(this.router + '/createSchedule/' + scheduleName + '/' + description + '/' + access + '/' + email, {}, {headers: postHeader});
   }
 
   updateSchedule(scheduleName: String, courses: {}): Observable<UpdateSchedule> {
@@ -42,5 +42,9 @@ export class RequestService {
 
   listSchedules(): Observable<ListSchedules[]> {
     return this.http.get<ListSchedules[]>(this.router + '/viewSchedules');
+  }
+
+  deleteSchedules(scheduleName: String) {
+    return this.http.delete(this.router + '/deleteSchedule/' + scheduleName);
   }
 }

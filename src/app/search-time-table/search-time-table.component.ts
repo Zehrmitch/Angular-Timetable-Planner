@@ -17,6 +17,8 @@ export class SearchTimeTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
   displaySubjects(SC: string, CC: string) {
     var SC = SC.toUpperCase();
     var CC = CC.toUpperCase();
