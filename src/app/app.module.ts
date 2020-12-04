@@ -16,11 +16,12 @@ import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { CoursesComponent } from './courses/courses.component';
-import { AboutComponent } from './about/about.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     RegisterComponent,
     SchedulesComponent,
     CoursesComponent,
-    AboutComponent,
     AdminDashboardComponent
   ],
   imports: [
@@ -46,6 +46,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     FormsModule,
     AppRoutingModule,
     AngularFirestoreModule,
+    MatExpansionModule,
+    MatCardModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
