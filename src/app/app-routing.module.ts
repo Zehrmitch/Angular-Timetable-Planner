@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { CoursesComponent } from './courses/courses.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'schedules', component: SchedulesComponent, canActivate: [AuthGuard]},
   {path: 'courses', component: CoursesComponent},
   {path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard]},
+  {path: 'privacy', component: PrivacyComponent},
   {path: '', redirectTo:'main',pathMatch: 'full'}
 ];
 

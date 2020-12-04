@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     SchedulesComponent,
     CoursesComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,
