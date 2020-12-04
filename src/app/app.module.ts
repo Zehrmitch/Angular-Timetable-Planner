@@ -23,6 +23,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { CourseListComponent } from './course-list/course-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     SchedulesComponent,
     CoursesComponent,
     AdminDashboardComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    CourseListComponent
   ],
   imports: [
     BrowserModule,

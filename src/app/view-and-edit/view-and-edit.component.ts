@@ -10,6 +10,7 @@ import { ListSchedules } from 'src/app/Models/list-schedules.model';
 export class ViewAndEditComponent implements OnInit {
 
   schedules: ListSchedules[];
+  deleteScheduleName: string;
 
   constructor(private service: RequestService) { }
 

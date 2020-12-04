@@ -48,9 +48,8 @@ router.get("/viewSchedules", function(req, res) {
 	res.send(allSchedules);
 });
 
-router.post("/createSchedule/:SN", function(req, res) {
-    console.log(req.params.SN);
-    let newSchedule = createSchedule(req.params.SN);
+router.post("/createSchedule/:SN/:DSC/:ACC/:EM", function(req, res) {
+    let newSchedule = createSchedule(req.params.SN, req.params.DSC, req.params.ACC, req.params.EM);
 	res.send(newSchedule);
 });
 
@@ -134,11 +133,19 @@ function deleteAllSchedules() {
     return output;
 }
 
-function createSchedule(sName) {
+function createSchedule(sName, desc, acc, email) {
+    const dateTime = new Date();
     if(cache.getKey(sName) == undefined){
-        cache.setKey(sName, { });
+        cache.setKey(sName, { 
+            email: email,
+            scheduleName: sName,
+            description: desc,
+            accessiblity: acc,
+            lastEdit: dateTime,
+            courses: []
+        });
         cache.save(true);
-        let schedule = cache.getKey(sName);
+        console.log(cache.getKey(sName));
         let resposeToCreate = { info: 'Schedule created' };
         return resposeToCreate;
     }
