@@ -15,7 +15,18 @@
     <button mat-raised-button (click)="deleteSchedule()">Delete Schedule</button>
   </div>
   <br>
-	<ul id="viewSchedules">
-		<li *ngFor="let x of schedules">Subject: {{ x.scheduleName }}</li>
-	</ul>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let x of schedules| keyvalue" class="accordion">
+      <mat-expansion-panel-header class="expansionHeader">
+        <div class="header"> 
+          <p>Timetable Name: {{ x.key }}</p>
+          <p>Email: {{ x.value.email }}</p>
+          <p>Description: {{ x.value.description }}</p>
+        </div>
+      </mat-expansion-panel-header>
+      <p>Accessiblity: {{ x.value.accessiblity }}</p>
+      <p>Last Edit: {{ x.value.lastEdit }}</p>
+      <p>Courses: {{ x.value.courses }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

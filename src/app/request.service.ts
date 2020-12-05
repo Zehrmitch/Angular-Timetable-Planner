@@ -44,7 +44,11 @@ export class RequestService {
     return this.http.get<ListSchedules[]>(this.router + '/viewSchedules');
   }
 
-  deleteSchedules(scheduleName: String) {
+  deleteSchedule(scheduleName: String) {
     return this.http.delete(this.router + '/deleteSchedule/' + scheduleName);
+  }
+
+  deleteAllSchedules(){
+    return this.http.delete(this.router + '/deleteAllSchedules');
   }
 }

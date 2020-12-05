@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/request.service';
 import { ListSchedules } from 'src/app/Models/list-schedules.model';
+import { BrowserModule } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-view-and-edit',
@@ -9,7 +10,7 @@ import { ListSchedules } from 'src/app/Models/list-schedules.model';
 })
 export class ViewAndEditComponent implements OnInit {
 
-  schedules: ListSchedules[];
+  schedules: any[];
   deleteScheduleName: string;
 
   constructor(private service: RequestService) { }
@@ -17,14 +18,31 @@ export class ViewAndEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteAllSchedules(){
+    this.service.deleteAllSchedules().subscribe(e =>{
+      alert(e);
+      this.displaySchedules();
+    },error => {
+      alert(error.error)
+    })
+  }
+
+  deleteSchedule(){
+    this.service.deleteSchedule(this.deleteScheduleName).subscribe(e =>{
+      alert(e);
+      this.displaySchedules();
+    },error => {
+      alert(error.error)
+    })
+  }
+
   displaySchedules() {
     this.service.listSchedules().subscribe(e => {
-      console.log("e: " + e);
-      Object.keys(e).map(function(key, index){
-        console.log("key: " + key);
-        this.schedules = key;
-      });
-    });
-    return this.schedules;
-  }
+        //const entries = Object.entries(e);
+        //console.log("result: " + entries);
+        this.schedules = e;
+      },error => {
+        alert(error.error)
+      })
+    }
 }

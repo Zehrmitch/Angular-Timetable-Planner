@@ -101,7 +101,6 @@ function updateSchedule(sName, sCourses) {
 
 function getSchedules(){
     let allSchedules = cache.all();
-    console.log(allSchedules);
     return allSchedules;
 }
 
@@ -125,8 +124,7 @@ function deleteAllSchedules() {
     for (var key in allSchedule){
         cache.removeKey(key);
     }
-    cache.save(true); //Rename
-
+    cache.save(true);
     let output = {
         text: 'deleted'
     }

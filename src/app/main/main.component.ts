@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import 'firebase/auth';
 
 @Component({
 	selector: "app-main",
