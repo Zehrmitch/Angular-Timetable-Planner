@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from 'src/app/request.service';
+import { ListSchedules } from 'src/app/Models/list-schedules.model';
+import { BrowserModule } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-course-list',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseListComponent implements OnInit {
 
-  constructor() { }
+  schedules: any[];
+
+  constructor(private service: RequestService) { }
 
   ngOnInit(): void {
+    this.displaySchedules();
   }
 
+  displaySchedules() {
+    this.service.listSchedules().subscribe(e => {
+      for (let [key, value] of Object.entries(e)) {
+        if(Object.entries(value)[3][1] ==  "false"){
+          delete e[key];
+        }
+      }
+        this.schedules = e;
+      },error => {
+        alert(error.error)
+      })
+  }
 }

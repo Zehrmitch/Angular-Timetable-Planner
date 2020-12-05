@@ -26,7 +26,19 @@
       </mat-expansion-panel-header>
       <p>Accessiblity: {{ x.value.accessiblity }}</p>
       <p>Last Edit: {{ x.value.lastEdit }}</p>
-      <p>Courses: {{ x.value.courses }}</p>
+      <div *ngFor="let y of x.value.courses| keyvalue">
+        <div *ngFor="let z of y.value| keyvalue; let i = index">
+          <mat-expansion-panel class="accordion">
+            <mat-expansion-panel-header class="expansionHeader">
+              <div class="header"> 
+                <h4>Course {{i+1}}</h4>
+              </div>
+            </mat-expansion-panel-header>
+            <p>Course Name: {{ z.value }}</p>
+            <p>Course Code: {{ z.key }}</p>
+            </mat-expansion-panel>
+        </div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

@@ -36,8 +36,8 @@ export class RequestService {
     return this.http.post<NewTimetable>(this.router + '/createSchedule/' + scheduleName + '/' + description + '/' + access + '/' + email, {}, {headers: postHeader});
   }
 
-  updateSchedule(scheduleName: String, courses: {}): Observable<UpdateSchedule> {
-    return this.http.put<UpdateSchedule>(this.router + '/updateSchedule/' + scheduleName, {body: JSON.stringify(courses)}, {headers: putHeader});
+  updateSchedule(scheduleName: String, description: String, publicity: boolean, email: string, courses: {}): Observable<UpdateSchedule> {
+    return this.http.put<UpdateSchedule>(this.router + '/updateSchedule/' + scheduleName + '/' + description + '/' + publicity + '/' + email, {body: courses}, {headers: putHeader});
   }
 
   listSchedules(): Observable<ListSchedules[]> {

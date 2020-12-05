@@ -1,13 +1,21 @@
 #courseList{
     margin-top: 5%;
-    margin-right: 25%;
-    margin-left: 25%;
     box-shadow: 0 0 0 2px black inset;
     overflow:auto;
-    width: 50%; 
+    width: 98%; 
     float: left; 
     background-color: rgb(167, 237, 255);
     padding: 10px;
     padding-bottom: 20px;
-    text-align: center;
+}
+.header {
+    display: block;
+    margin: 10px;
+}
+.expansionHeader{
+    height: auto;
+}
+.accordion{
+    margin: 10px;
+    background-color: transparent;
 }

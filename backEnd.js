@@ -3,6 +3,7 @@ const fs = require("fs");
 const process = require("process");
 const app = express();
 const port = process.env.PORT || 3000;
+var bodyParser = require('body-parser')
 
 var router = express.Router();
 var cors = require('cors');
@@ -15,6 +16,7 @@ var text = JSON.parse(rawdata);
 
 // REST
 app.use(express.json());
+router.use(bodyParser.json());
 app.use('/', express.static('static'));
 
 app.use(cors());
@@ -49,14 +51,17 @@ router.get("/viewSchedules", function(req, res) {
 });
 
 router.post("/createSchedule/:SN/:DSC/:ACC/:EM", function(req, res) {
+    req.params.SN = sanitize(req.params.SN);
+    req.params.DSC = sanitize(req.params.DSC);
+    req.params.EM = sanitize(req.params.EM);
     let newSchedule = createSchedule(req.params.SN, req.params.DSC, req.params.ACC, req.params.EM);
 	res.send(newSchedule);
 });
 
-router.put("/updateSchedule/:scheduleName", function(req, res) {
+router.put("/updateSchedule/:scheduleName/:DSC/:PUB/:EM", function(req, res) {
     req.params.scheduleName = sanitize(req.params.scheduleName);
-    req.body = sanitize(req.body);
-    let updatedSchedule = updateSchedule(req.params.scheduleName, req.body);
+    req.params.DSC = sanitize(req.params.DSC);
+    let updatedSchedule = updateSchedule(req.params.scheduleName, req.params.DSC, req.params.PUB, req.params.EM, req.body);
 	res.send(updatedSchedule);
 });
 
@@ -77,21 +82,33 @@ app.listen(port, () => {
 });
 
 // Functions
-function sanitize (string){
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#x27;',
-        "/": '&#x2F;',
-    };
-    const reg = /[&<>"'/]/ig;
-    return string.replace(reg, (match)=>(map[match]));
+function sanitize (input){
+    if (typeof input === 'string' || input instanceof String){
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            "/": '&#x2F;',
+        };
+        const reg = /[&<>"'/]/ig;
+        return input.replace(reg, (match)=>(map[match]));
+    }
 }
 
-function updateSchedule(sName, sCourses) {
-    cache.setKey(sName, sCourses);
+function updateSchedule(sName, desc, pub, email, sCourses) {
+    const dateTime = new Date();
+    var courses = Object.entries(sCourses);
+
+    cache.setKey(sName,  {
+        email: email,
+        scheduleName: sName,
+        description: desc,
+        accessiblity: pub,
+        lastEdit: dateTime,
+        courses: sCourses
+    });
     cache.save(true);
     let output = {
         text: 'Schedules have been updated'
@@ -101,6 +118,7 @@ function updateSchedule(sName, sCourses) {
 
 function getSchedules(){
     let allSchedules = cache.all();
+    console.log(allSchedules);
     return allSchedules;
 }
 
@@ -114,7 +132,7 @@ function deleteSchedule(sName) {
     cache.removeKey(sName);
     cache.save(true);
     let output = {
-        text: 'deleted'
+        text: 'Schedule has been deleted'
     }
     return output;
 }
@@ -126,7 +144,7 @@ function deleteAllSchedules() {
     }
     cache.save(true);
     let output = {
-        text: 'deleted'
+        text: 'All schedules have been deleted'
     }
     return output;
 }

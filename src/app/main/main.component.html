@@ -6,16 +6,15 @@
     </p>
 </div>
 
-
 <div id="login">
     <h2>Login</h2>
     <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)] = "email" id="timetableCourseCode" placeholder="eg. test@example.ca">
+        <input matInput [(ngModel)] = "email" placeholder="eg. test@example.ca">
     </mat-form-field>
     <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
-        <input matInput [(ngModel)] = "password" id="timetableCourseCode" type="password">
+        <input matInput [(ngModel)] = "password" type="password">
     </mat-form-field>
     <br>
     <button mat-raised-button (click)="loginWithEmail()">Login</button>

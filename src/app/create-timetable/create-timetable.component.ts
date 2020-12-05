@@ -20,13 +20,18 @@ export class CreateTimetableComponent implements OnInit {
     text: ''
   };
 
+  scheduleUpdate: string;
   scheduleName: string;
   isPublic: boolean;
+  updateIfPublic: boolean;
   description: string;
+  descriptionUpdate: string;
 
   constructor(private service: RequestService, public auth: AngularFireAuth) { 
     this.isPublic = false;
+    this.updateIfPublic = false;
     this.description = "";
+    this.descriptionUpdate = this.description;
   }
 
   ngOnInit(): void {
@@ -39,18 +44,32 @@ export class CreateTimetableComponent implements OnInit {
     this.isPublic=true;
   }
 
+  updatePrivate(){
+    this.updateIfPublic=false;
+  }
+  updatePublic(){
+    this.updateIfPublic=true;
+  }
+
   createNewSchedule() {
     var user = firebase.auth().currentUser;
     var email = user.email;
-    console.log(email);
+    if (this.description == ""){
+      this.description = "No description";
+    }
     this.service.createSchedule(this.scheduleName, this.description, this.isPublic, email).subscribe(e => {
       this.courseList = e;
     });
     return this.courseList;
   }
 
-  addCourses(schedulesName: String){
+  addCourses(){
     let courses = {};
+    var user = firebase.auth().currentUser;
+    var email = user.email;
+    if (this.descriptionUpdate == ""){
+      this.descriptionUpdate = "No description";
+    }
     for(var i = 1; i < 7; i++){
         var key = (<HTMLInputElement>document.getElementById(String(i) + "c")).value;
         var val = (<HTMLInputElement>document.getElementById(String(i) + "n")).value;
@@ -58,7 +77,7 @@ export class CreateTimetableComponent implements OnInit {
             courses[key] = val;
         }
     }
-    this.service.updateSchedule(schedulesName, courses).subscribe(e => {
+    this.service.updateSchedule(this.scheduleUpdate, this.descriptionUpdate, this.updateIfPublic, email, courses).subscribe(e => {
       this.scheduleList = e;
     });
     return this.scheduleList;
