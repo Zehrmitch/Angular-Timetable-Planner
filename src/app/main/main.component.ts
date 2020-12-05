@@ -25,10 +25,12 @@ export class MainComponent implements OnInit {
 		this.password = "";
 	}
 
+	// Use googles login 
 	loginWithGoogle() {
 		this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 	}
 
+	// Use firebase email login 
 	loginWithEmail() {
 		this.auth
 			.signInWithEmailAndPassword(this.email, this.password)
@@ -41,6 +43,7 @@ export class MainComponent implements OnInit {
 			});
 	}
 
+	// Log out of the current user
 	logout() {
 		this.auth.signOut();
 		alert("Logged out");

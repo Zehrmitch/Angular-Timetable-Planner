@@ -12,4 +12,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  // This module groups the other course modules for easy display
+
 }

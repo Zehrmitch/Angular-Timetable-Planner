@@ -18,6 +18,7 @@ export class CourseListComponent implements OnInit {
     this.displaySchedules();
   }
 
+  // Display all schedules that dont have accessibility set to false
   displaySchedules() {
     this.service.listSchedules().subscribe(e => {
       for (let [key, value] of Object.entries(e)) {

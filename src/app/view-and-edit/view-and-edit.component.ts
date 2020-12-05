@@ -20,6 +20,7 @@ export class ViewAndEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Calls the delete all schedules function. Verifies with the user that they want to complete the action
   deleteAllSchedules(){
     if(confirm("Confirm deleting all course lists?")) {
       this.service.deleteAllSchedules().subscribe(e =>{
@@ -31,6 +32,7 @@ export class ViewAndEditComponent implements OnInit {
     }
   }
 
+  // Calls the delete specified schedule function. Verifies with the user that they want to complete the action
   deleteSchedule(){
     if(confirm("Are you sure you would like to delete: " + this.deleteScheduleName)) {
       this.service.deleteSchedule(this.deleteScheduleName).subscribe(e =>{
@@ -42,6 +44,7 @@ export class ViewAndEditComponent implements OnInit {
     }
   }
 
+  // Display all schedules that are created by the logged in user
   displaySchedules() {
     this.service.listSchedules().subscribe(e => {
       var user = firebase.auth().currentUser;

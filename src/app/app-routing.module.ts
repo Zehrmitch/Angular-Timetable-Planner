@@ -9,6 +9,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { AuthGuard } from './auth/auth.guard';
 
+// Set all of the routes. Accessed by nav bar at top
 const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'register', component: RegisterComponent},

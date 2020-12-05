@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Uses firebase to register a new user
   register(){
     if (this.password == this.passwordTwo){
       this.auth.createUserWithEmailAndPassword(this.email, this.password)
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  // Adds the users info to the database
   createUser() {
     var data = {
       email: this.email,

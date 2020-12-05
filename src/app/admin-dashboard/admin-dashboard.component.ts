@@ -28,15 +28,16 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get list of all users from the database
     this.usersCollection = this.firestore.collection('users', ref => {
       return ref.orderBy('email');
     });
     this.users = this.usersCollection.valueChanges();
   }
 
+  // Calls firebases email password reset
   resetPass(){
     var user = firebase.auth().currentUser;
-    
     this.auth.sendPasswordResetEmail(user.email).then(function() {
       alert("Password Reset Email Sent");
     }).catch(function(error) {

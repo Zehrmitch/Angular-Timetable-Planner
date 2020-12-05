@@ -12,5 +12,6 @@ export class SchedulesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Group all schedule items for easy display
 
 }

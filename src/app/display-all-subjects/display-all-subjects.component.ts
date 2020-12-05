@@ -17,6 +17,8 @@ export class DisplayAllSubjectsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  // Displays and hides all of the avalible courses. Sorted by subject
   displaySubjects() {
     this.service.getSubjects().subscribe(e => {
       this.courses = e;

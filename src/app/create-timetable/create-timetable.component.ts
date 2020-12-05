@@ -68,6 +68,7 @@ export class CreateTimetableComponent implements OnInit {
       })
   }
 
+  // Calls create new schedule using inputed data and some login info
   createNewSchedule() {
       if (this.numSchedules >= 20){
         alert("You already have 20 schedules. Please delete some and try again");
@@ -85,6 +86,7 @@ export class CreateTimetableComponent implements OnInit {
       this.checkNumSchedules();
   }
 
+  // Updates the schedule with input data
   addCourses(){
     let courses = {};
     var user = firebase.auth().currentUser;

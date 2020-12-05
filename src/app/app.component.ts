@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Timetable Planner';
+  title = 'Timetable Planner - MZehr4 - Lab 5';
   items: Observable<any[]>;
 
   constructor(private firestore: AngularFirestore) {

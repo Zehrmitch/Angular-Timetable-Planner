@@ -1,11 +1,7 @@
-<p>Dashboard</p>
-
+<h1>Dashboard</h1>
 <p>Reset Password</p>
-<button (click)="resetPass()">Reset Password</button>
-
-<p>Add User Data</p>
-
-
+<button mat-raised-button (click)="resetPass()">Reset Password</button>
+<br>
 <h2>Registered Users</h2>
 <div *ngFor="let user of users | async">
     <p>{{ user | json }}</p>

@@ -17,7 +17,7 @@ export class SearchTimeTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  // Search all courses by Subject Code and Course Code
 
   displaySubjects(SC: string, CC: string) {
     var SC = SC.toUpperCase();

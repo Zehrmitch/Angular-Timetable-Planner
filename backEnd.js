@@ -21,6 +21,7 @@ app.use('/', express.static('static'));
 
 app.use(cors());
 
+// Rest calls
 router.get("/nameAndCodes", function(req, res) {
 	let nameAndCodesArray = getNameAndCode();
 	res.send(nameAndCodesArray);

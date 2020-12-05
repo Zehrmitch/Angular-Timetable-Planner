@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router){}
 
+  // Checks to see if the user is authenticated and can access the requested item
   canActivate(){
     var user = firebase.auth().currentUser;
     console.log(user);
