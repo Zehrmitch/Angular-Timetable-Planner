@@ -20,6 +20,7 @@ export class CreateTimetableComponent implements OnInit {
     text: ''
   };
 
+  numSchedules: number;
   scheduleUpdate: string;
   scheduleName: string;
   isPublic: boolean;
@@ -28,6 +29,7 @@ export class CreateTimetableComponent implements OnInit {
   descriptionUpdate: string;
 
   constructor(private service: RequestService, public auth: AngularFireAuth) { 
+    this.numSchedules = 0;
     this.isPublic = false;
     this.updateIfPublic = false;
     this.description = "";
@@ -35,6 +37,7 @@ export class CreateTimetableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkNumSchedules();
   }
 
   setPrivate(){
@@ -51,16 +54,35 @@ export class CreateTimetableComponent implements OnInit {
     this.updateIfPublic=true;
   }
 
-  createNewSchedule() {
+  checkNumSchedules(){
+    this.numSchedules = 0;
     var user = firebase.auth().currentUser;
-    var email = user.email;
-    if (this.description == ""){
-      this.description = "No description";
-    }
-    this.service.createSchedule(this.scheduleName, this.description, this.isPublic, email).subscribe(e => {
-      this.courseList = e;
-    });
-    return this.courseList;
+    this.service.listSchedules().subscribe(e => {
+      for (let [key, value] of Object.entries(e)) {
+        if(Object.entries(value)[0][1] == user.email){
+          this.numSchedules++;
+        }
+      }
+      },error => {
+        alert(error.error)
+      })
+  }
+
+  createNewSchedule() {
+      if (this.numSchedules >= 20){
+        alert("You already have 20 schedules. Please delete some and try again");
+      }else {
+        var user = firebase.auth().currentUser;
+        var email = user.email;
+        if (this.description == ""){
+          this.description = "No description";
+        }
+        this.service.createSchedule(this.scheduleName, this.description, this.isPublic, email).subscribe(e => {
+          this.courseList = e;
+        });
+        alert("Schedule Created");
+      }
+      this.checkNumSchedules();
   }
 
   addCourses(){

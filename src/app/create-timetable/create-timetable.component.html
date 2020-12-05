@@ -1,7 +1,7 @@
 <div id="newSchedule">
+	<p id="numSch">You have created: {{ numSchedules }} schedules</p>
 	<div id="newList">
 		<h1>New Class List</h1>
-
 		<mat-form-field appearance="standard">
 			<mat-label>Schedule Name</mat-label>
 			<input matInput [(ngModel)]="scheduleName" />
@@ -19,91 +19,92 @@
 		<button mat-raised-button (click)="createNewSchedule()">
 			Create Schedule
 		</button>
-		<ul id="newCourse">
-			<li>{{ courseList.info }}</li>
-		</ul>
 	</div>
 	<hr />
-	<mat-form-field appearance="standard">
-		<mat-label>Schedule to Update</mat-label>
-		<input matInput [(ngModel)]="scheduleUpdate" />
-	</mat-form-field>
-	<button mat-raised-button (click)="updatePublic()">Public</button>
-	<button mat-raised-button (click)="updatePrivate()">Private</button>
-	<div *ngIf="updateIfPublic"><p>The schedule will be Public</p></div>
-	<div *ngIf="!updateIfPublic"><p>The schedule will be Private</p></div>
-	<mat-form-field appearance="standard">
-		<mat-label>Schedule Description</mat-label>
-		<input matInput [(ngModel)]="descriptionUpdate"/>
-	</mat-form-field>
-	<button mat-raised-button (click)="addCourses()">Add/Update Courses</button>
-	<ul id="newTimetable">
-		<li>{{ scheduleList.text }}</li>
-	</ul>
-	<p>
+	<div id="addCourses">
+		<h1>Update Course List</h1>
 		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="1c" placeholder="eg. 1021B" />
+			<mat-label>Schedule to Update</mat-label>
+			<input matInput [(ngModel)]="scheduleUpdate" />
 		</mat-form-field>
+		<br />
+		<button mat-raised-button (click)="updatePublic()">Public</button>
+		<button mat-raised-button (click)="updatePrivate()">Private</button>
+		<div *ngIf="updateIfPublic"><p>The schedule will be Public</p></div>
+		<div *ngIf="!updateIfPublic"><p>The schedule will be Private</p></div>
+		<mat-form-field appearance="standard">
+			<mat-label>Schedule Description</mat-label>
+			<input matInput [(ngModel)]="descriptionUpdate" />
+		</mat-form-field>
+		<button mat-raised-button (click)="addCourses()">Add/Update Courses</button>
+		<ul id="newTimetable">
+			<li>{{ scheduleList.text }}</li>
+		</ul>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="1c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="1n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="2c" placeholder="eg. 1021B" />
-		</mat-form-field>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="1n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="2c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="2n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="3c" placeholder="eg. 1021B" />
-		</mat-form-field>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="2n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="3c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="3n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="4c" placeholder="eg. 1021B" />
-		</mat-form-field>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="3n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="4c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="4n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="5c" placeholder="eg. 1021B" />
-		</mat-form-field>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="4n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="5c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="5n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Course Code</mat-label>
-			<input matInput id="6c" placeholder="eg. 1021B" />
-		</mat-form-field>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="5n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+		<p>
+			<mat-form-field appearance="standard">
+				<mat-label>Course Code</mat-label>
+				<input matInput id="6c" placeholder="eg. 1021B" />
+			</mat-form-field>
 
-		<mat-form-field appearance="standard">
-			<mat-label>Subject Name</mat-label>
-			<input matInput id="6n" placeholder="eg. ACTURSCI" />
-		</mat-form-field>
-	</p>
+			<mat-form-field appearance="standard">
+				<mat-label>Subject Name</mat-label>
+				<input matInput id="6n" placeholder="eg. ACTURSCI" />
+			</mat-form-field>
+		</p>
+	</div>
 </div>
