@@ -4,7 +4,6 @@ const process = require("process");
 const app = express();
 const port = process.env.PORT || 3000;
 var bodyParser = require('body-parser')
-
 var router = express.Router();
 var cors = require('cors');
 
@@ -15,9 +14,13 @@ let rawdata = fs.readFileSync("data.json");
 var text = JSON.parse(rawdata);
 
 // REST
+// const path = require('path');// Point to directory containing static files
+// app.use(express.static(path.join(__dirname, 'dist/se3316-mzehr4-lab4')));//catch all other routes to return the index file
+// app.get('*', (req,res) => {res.sendFile(path.join(__dirname,'dist/se3316-mzehr4-lab4/index.html'));});
+app.use('/', express.static('dist/se3316-mzehr4-lab4'))
 app.use(express.json());
 router.use(bodyParser.json());
-app.use('/', express.static('static'));
+//app.use('/', express.static('static'));
 
 app.use(cors());
 

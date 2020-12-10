@@ -18,8 +18,7 @@ const putHeader = new HttpHeaders().set("Content-Type","application/json; charse
 export class RequestService {
 
   // API middleware
-
-  router = `http://localhost:3000/api`;
+  router = `http://${window.location.hostname}:3000/api`;
   constructor(private http : HttpClient) { }
 
   getSubjects(): Observable<SubjectList[]> {
