@@ -14,47 +14,45 @@ let rawdata = fs.readFileSync("data.json");
 var text = JSON.parse(rawdata);
 
 // REST
-// const path = require('path');// Point to directory containing static files
-// app.use(express.static(path.join(__dirname, 'dist/se3316-mzehr4-lab4')));//catch all other routes to return the index file
-// app.get('*', (req,res) => {res.sendFile(path.join(__dirname,'dist/se3316-mzehr4-lab4/index.html'));});
-app.use('/', express.static('dist/se3316-mzehr4-lab4'))
-app.use(express.json());
-router.use(bodyParser.json());
+//app.use('/', express.static('dist/se3316-mzehr4-lab4'))
 //app.use('/', express.static('static'));
 
+
+app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 // Rest calls
-router.get("/nameAndCodes", function(req, res) {
+app.get("/api/nameAndCodes", function(req, res) {
 	let nameAndCodesArray = getNameAndCode();
 	res.send(nameAndCodesArray);
 });
 
-router.get("/getCourseCodes/:id", function(req, res) {
+app.get("/api/getCourseCodes/:id", function(req, res) {
     req.params.id = sanitize(req.params.id);
 	let nameAndCodesArray = getCourseCodes(req.params.id);
 	res.send(nameAndCodesArray);
 });
 
-router.get("/getCourseSearch/:SC/:CC", function(req, res) {
+app.get("/api/getCourseSearch/:SC/:CC", function(req, res) {
     req.params.SC = sanitize(req.params.SC);
     req.params.CC = sanitize(req.params.CC);
 	let courseSearch = getCourseSearch(req.params.SC, req.params.CC);
 	res.send(courseSearch);
 });
 
-router.get("/getSchedule/:scheduleName", function(req, res) {
+app.get("/api/getSchedule/:scheduleName", function(req, res) {
     req.params.scheduleName = sanitize(req.params.scheduleName);
     let scheduleSearch = getSchedule(req.params.scheduleName);
 	res.send(scheduleSearch);
 });
 
-router.get("/viewSchedules", function(req, res) {
+app.get("/api/viewSchedules", function(req, res) {
     let allSchedules = getSchedules();
 	res.send(allSchedules);
 });
 
-router.post("/createSchedule/:SN/:DSC/:ACC/:EM", function(req, res) {
+app.post("/api/createSchedule/:SN/:DSC/:ACC/:EM", function(req, res) {
     req.params.SN = sanitize(req.params.SN);
     req.params.DSC = sanitize(req.params.DSC);
     req.params.EM = sanitize(req.params.EM);
@@ -62,27 +60,32 @@ router.post("/createSchedule/:SN/:DSC/:ACC/:EM", function(req, res) {
 	res.send(newSchedule);
 });
 
-router.put("/updateSchedule/:scheduleName/:DSC/:PUB/:EM", function(req, res) {
+app.put("/updateSchedule/:scheduleName/:DSC/:PUB/:EM", function(req, res) {
     req.params.scheduleName = sanitize(req.params.scheduleName);
     req.params.DSC = sanitize(req.params.DSC);
     let updatedSchedule = updateSchedule(req.params.scheduleName, req.params.DSC, req.params.PUB, req.params.EM, req.body);
 	res.send(updatedSchedule);
 });
 
-router.delete("/deleteSchedule/:scheduleName", function(req, res) {
+app.delete("/api/deleteSchedule/:scheduleName", function(req, res) {
     req.params.scheduleName = sanitize(req.params.scheduleName);
     let deleteASchedule = deleteSchedule(req.params.scheduleName);
 	res.send(deleteASchedule);
 });
 
-router.delete("/deleteAllSchedules", function(req, res) {
+app.delete("/api/deleteAllSchedules", function(req, res) {
     let deleteAllSchedule = deleteAllSchedules();
 	res.send(deleteAllSchedule);
 });
 
-app.use('/api', router);
+const path = require('path'); // Point to directory containing static files
+app.use(express.static(path.join(__dirname, 'dist/se3316-mzehr4-lab4')));//catch all other routes to return the index file
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname,'dist/se3316-mzehr4-lab4/index.html'));
+});
+
 app.listen(port, () => {
-    console.log(`Timetable is listening at http://localhost:${port}`);
+    console.log(`Timetable is listening on port: ${port}`);
 });
 
 // Functions
