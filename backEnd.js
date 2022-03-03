@@ -17,7 +17,6 @@ var text = JSON.parse(rawdata);
 //app.use('/', express.static('dist/se3316-mzehr4-lab4'))
 //app.use('/', express.static('static'));
 
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
